@@ -64,28 +64,23 @@ public class CommonPage extends AbstractPage {
     }
 
     public void delayAndSetValueForCssElement(String path, String value) {
-        waitForAjaxControls();
         $(By.cssSelector(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).scrollTo().setValue(value);
     }
 
     public void delayAndClickForCssElement(String path) {
-        waitForAjaxControls();
         $(By.cssSelector(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).scrollTo().click();
     }
 
     public void delayAndClickWithoutScrollForCssElement(String path) {
-        waitForAjaxControls();
         $(By.cssSelector(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).click();
     }
 
     public void delayAndClickWithoutScrollForXpathElement(String path) {
-        waitForAjaxControls();
         $(By.xpath(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL);
         $(By.xpath(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).click();
     }
 
     public void delayAndClickWithoutScrollForIdElement(String path) {
-        waitForAjaxControls();
         $(By.id(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).click();
     }
 

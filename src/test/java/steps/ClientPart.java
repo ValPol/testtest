@@ -6,13 +6,12 @@ import PageUser.SettingsPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import helpers.ConfigContainer;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class LogIn extends CommonPage {
+public class ClientPart extends CommonPage {
 
     LogInPage page;
     ConfigContainer config = new ConfigContainer();
@@ -29,24 +28,18 @@ public class LogIn extends CommonPage {
         page.setLoginCredentials(credentials);
     }
 
-
     @When("^I have select signature \"([^\"]*)\"$")
     public void iHaveSelectSignature(int credentials) throws Throwable {
         page.setLoginCredentials(credentials);
     }
-
-    @Then("^I successfully log in$")
-    public void iSuccessfullyLogIn() throws Throwable {
-    }
-
 
     @When("^I have opened KYC-form$")
     public void iHaveOpenedKYCForm() throws Throwable {
         settingsPage.getKYCForm();
     }
 
-    @When("^I fill KYC-form$")
-    public void iFillKYCForm() throws Throwable {
+    @When("^I have filled KYC-form$")
+    public void iHaveFilledKYCForm() throws Throwable {
         settingsPage.fillKYCForm();
     }
 }

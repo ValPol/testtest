@@ -5,9 +5,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class SettingsPage extends CommonPage {
 
-    private final String settingsPage = "//a[@href=\"/settings\"]/.";
+    private final String settingsPage = "#main-navigation a[href=\"/settings\"]";
 
-    private final String verificationTab = "//input[@value=\"kyc\"]//..";
+    private final String verificationTab = "[role=\"tab\"][aria-controls=\"settings-kyc\"]";
 
     private final String firstNameField = "[name='firstName']";
 
@@ -19,9 +19,9 @@ public class SettingsPage extends CommonPage {
 
 
     public void getKYCForm() {
-        //delayAndClickForXpathElement(settingsPage);
-      ///  delayAndClickForXpathElement(verificationTab);
-        open ("http://tokensale.dev.avalab.io/settings/kyc");
+        $("#main-navigation");
+        delayAndClickForCssElement(settingsPage);
+        delayAndClickForCssElement(verificationTab);
     }
 
     public void fillKYCForm(){

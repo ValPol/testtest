@@ -15,9 +15,6 @@ public class ConfigContainer implements Serializable {
     public static final String uploadFileUnformalizedDocumentExchange = "\\src\\test\\resources\\attachements\\exchangeDocumentForTest.txt";
 
     //------------------------------------------------------------------------------------------------------------------
-
-    SiteURL siteURLHelper = new SiteURL();
-
     /******************************************************************************************************************
      *
      *                                            Поля класса
@@ -76,19 +73,6 @@ public class ConfigContainer implements Serializable {
         }
     }
 
-    /**
-     * Выбор  адреса сайта (передается с помощью внешнего параметра)
-     * @return url сайта
-     **/
-    public String getSiteUrl() {
-        String siteUrl = System.getenv("EDO_AUTOTEST_URL");
-        System.out.println(" [-]: SYSTEM ENV variable EDO_AUTOTEST_URL is : '" + siteUrl + "'.");
-        if (siteUrl != null) {
-            if (!(siteUrl.endsWith("/")))
-                siteUrl = siteUrl + "/";
-        } else siteUrl = siteURLHelper.SiteUrlServicing;
-        return siteUrl;
-    }
 
     /**
      * Выбор файла конфигурации
