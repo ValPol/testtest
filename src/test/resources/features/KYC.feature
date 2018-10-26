@@ -40,7 +40,8 @@ Feature: KYC send and approve/decline feature
     When I have select signature "2"
     When I have opened KYC section
     When I have opened KYC request
-    Then I have approved KYC request
+    Then I have decline KYC request
+
 
 
 
