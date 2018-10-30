@@ -99,17 +99,18 @@ public class CommonPage extends AbstractPage {
     }
 
     public void delayAndSetValueForIdElement(String path, String value) {
-        waitForAjaxControls();
         $(By.id(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).scrollTo().setValue(value);
     }
 
     public void delayAndSendKeysForIdElement(String path, String value) {
-        waitForAjaxControls();
         $(By.id(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).scrollTo().sendKeys(value);
     }
 
+    public void delayAndSendKeysForCssElement(String path, String value) {
+        $(By.cssSelector(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL).sendKeys(value);
+    }
+
     public void delayAndSetValueWithoutScrollForIdElement(String path, String value) {
-        waitForAjaxControls();
         $(By.id(path)).waitUntil(visible, DELAY_MAX, DELAY_INTERVAL).setValue(value);
     }
 
@@ -119,38 +120,31 @@ public class CommonPage extends AbstractPage {
     }
 
     public void setValueForIdElement(String path, String value) {
-        waitForAjaxControls();
         $(By.id(path)).setValue(value);
     }
 
     public void setValueForXpathElement(String path, String value) {
-        waitForAjaxControls();
         $(By.xpath(path)).setValue(value);
     }
 
     public void delayAndSendFileForIdElement(String path, String document) {
-        waitForAjaxControls();
         $(By.id(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL).sendKeys(document);
     }
 
     public void delayAndSendFileForXpathElement(String path, String document) {
-        waitForAjaxControls();
         $(By.xpath(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL).scrollTo().sendKeys(document);
     }
 
     public String delayAndGetTextForXpathElement(String path) throws InterruptedException {
         // TODO refactor
-        waitForAjaxControls();
         return $(By.xpath(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL).getText();
     }
 
     public String delayAndGetTextFoCssElement(String path) throws InterruptedException {
-        waitForAjaxControls();
         return $(By.cssSelector(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL).getText();
     }
 
     public void disappearForXpathElement(String path) {
-        waitForAjaxControls();
         $(By.xpath(path)).waitUntil(disappear, DELAY_MAX, DELAY_INTERVAL);
     }
 
@@ -160,12 +154,10 @@ public class CommonPage extends AbstractPage {
     }
 
     public void existForXpathElement(String path) {
-        waitForAjaxControls();
         $(By.xpath(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL);
     }
 
     public void waitUntilDisappearForXpathElement(String path) {
-        waitForAjaxControls();
         $(By.xpath(path)).waitUntil(disappear, DELAY_MAX, DELAY_INTERVAL);
     }
 
