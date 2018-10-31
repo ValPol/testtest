@@ -10,9 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SettingsPage extends CommonPage {
 
@@ -26,9 +24,7 @@ public class SettingsPage extends CommonPage {
 
     private final String countrySelect = "select[name='country']";
 
-    private final String optionValue = "option[value='DZ']";
-
-    private final String maleGendeRBtn = "//input[@value='male']//..";
+    private final String maleGendeRBtn = ".Switcher_switcher_XqmzG label";
 
     private final String birthdayField = "input[name='birthDate']";
 
@@ -44,48 +40,29 @@ public class SettingsPage extends CommonPage {
     public void getKYCForm() {
         $("#main-navigation");
         delayAndClickForCssElement(settingsPage);
-        //open("http://tokensale.dev.avalab.io/settings/kyc");
-        //Select settingsDrD = new Select(driver.findElement(By.xpath("//select[@name=\"settings\"]")));
-       // settingsDrD.selectByValue("kyc");
-       delayAndClickWithoutScrollForCssElement(verificationTab);
+
+        delayAndClickWithoutScrollForCssElement(verificationTab);
     }
 
-    public void fillKYCForm(){
+    public void fillKYCForm() {
         delayAndSetValueForCSSElement(firstNameField, "John");
         delayAndSetValueForCSSElement(lastNameField, "John");
-
-      //  delayAndClickWithoutScrollForXpathElement("{//input[@value=\"male\"]//..");
-        delayAndSetValueForCSSElement(birthdayField, "01-01-2000");
-        $(".Switcher_switcher_XqmzG label", 1).click();
+        $(countrySelect).sendKeys(Keys.ARROW_DOWN);
+        /**
+         * Способ установки значения дропдауна через js
+         js.executeScript("var select = document.querySelector('select[name=\"country\"]');" +"select.value = \"RU\";select.dispatchEvent(new Event('input', { bubbles: true }));");
+         */
+        delayAndSendKeysForCssElement(birthdayField, "01-01-2000");
+        delayAndClickForCssElement(maleGendeRBtn);
         delayAndSetValueForCSSElement(phoneField, "1234456688");
         delayAndSendKeysForCssElement(fileInput, System.getProperty("user.dir") + "\\src\\test\\resources\\test.jpg");
+        existForXpathElement("//div[text()=\"ID scan\"]");
         delayAndClickWithoutScrollForCssElement(agreeChB);
-
-        Select dropDown = new Select(driver.findElement(By.cssSelector(countrySelect)));
-        List<WebElement> options = dropDown.getOptions();
-        for(WebElement option : options)
-        {
-            if( option.getAttribute("value").equals("AL") )
-            {
-                option.click();
-                break;
-            }
-        }
-
-//        delayAndClickWithoutScrollForCssElement(countrySelect);
-
-       // $(countrySelect).click();
-       // $(optionValue).click();
-
-        ///JavascriptExecutor js = (JavascriptExecutor) driver;
-        //js.executeScript("document.querySelector(\"select[name='country']\").setAttribute('class', 'vf-dirty vf-valid vf-touched')");
-        //$(countrySelect).sendKeys(Keys.ENTER);
-      //  $(countrySelect).sendKeys(Keys.ENTER);
-       // $(optionValue).sendKeys(Keys.ENTER);
-       // $(optionValue).click();
-   //     delayAndClickWithoutScrollForCssElement(countrySelect);
         delayAndClickWithoutScrollForCssElement(submitBtn);
+    }
 
+    public void kycFormPosted() {
+        //$(phoneField).waitUntil(driver.findElement(By.cssSelector(phoneField)).getAttribute("value").equals(""), 50000, 10);
     }
 
 }

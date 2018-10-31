@@ -46,7 +46,6 @@ public class ClientPart extends CommonPage {
 
     @Then("^I have posted KYC-request$")
     public void iHavePostedKYCRequest() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+       settingsPage.kycFormPosted();
     }
 }
