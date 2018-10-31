@@ -19,14 +19,14 @@ public class LogInPage extends CommonPage {
 
 
     //Выбор личного кабинета для работы
-    public void setLoginCredentials(int credentials) {
+    public void setLoginCredentials(String credentials) {
         switch (credentials) {
-            case 1: {
+            case "1": {
                 delayAndSetValueForXpathElement(userLogin, "testestestfortest1@yopmail.com");
                 delayAndSetValueForXpathElement(userPassword, "qwe123QWE");
                 break;
             }
-            case 2: {
+            case "2": {
                 delayAndSetValueForIdElement(userLogin, config.getConfigParameter("LoginOrganization"));
                 delayAndSetValueForIdElement(userPassword, config.getConfigParameter("PasswordOrganization"));
                 break;

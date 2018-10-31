@@ -25,12 +25,12 @@ public class ClientPart extends CommonPage {
     }
 
     @When("^I enter \"([^\"]*)\"$")
-    public void iEnter(int credentials) throws Throwable {
+    public void iEnter(String credentials) throws Throwable {
         page.setLoginCredentials(credentials);
     }
 
     @When("^I have select signature \"([^\"]*)\"$")
-    public void iHaveSelectSignature(int credentials) throws Throwable {
+    public void iHaveSelectSignature(String credentials) throws Throwable {
         page.setLoginCredentials(credentials);
     }
 

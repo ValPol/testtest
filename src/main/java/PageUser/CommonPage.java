@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class CommonPage extends AbstractPage {
     protected ConfigContainer config = ConfigContainer.getInstance();
     private final static int DELAY_MAX = 180000;
-    private final static int DELAY_INTERVAL = 50;
+    private final static int DELAY_INTERVAL = 15000;
 
     private final int REPEAT_TIMEOUT = 80;
 

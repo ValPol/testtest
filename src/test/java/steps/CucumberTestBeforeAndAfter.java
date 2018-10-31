@@ -1,6 +1,5 @@
 package steps;
 
-
 import com.codeborne.selenide.junit.BrowserStrategy;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -16,14 +15,13 @@ import org.openqa.selenium.WebDriverException;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 
-
 /**
  * Код, который выполняется до и после каждого сценария (Hooks).
  */
 public class CucumberTestBeforeAndAfter {
     /******************************************************************************************************************
      *
-     *                                          Методы класса
+     * Методы класса
      *
      *****************************************************************************************************************/
 
@@ -54,7 +52,7 @@ public class CucumberTestBeforeAndAfter {
                 scenario.write("Current Page URL is " + driver.getCurrentUrl());
                 byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
                 scenario.embed(screenshot, "image/png");
-                           } catch (WebDriverException somePlatformsDontSupportScreenshots) {
+            } catch (WebDriverException somePlatformsDontSupportScreenshots) {
                 System.err.println(somePlatformsDontSupportScreenshots.getMessage());
             }
         }
