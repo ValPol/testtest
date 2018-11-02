@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  selenium-hub:
+    image: selenium/hub
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium-hub
+      - HUB_PORT_4444_TCP_PORT=4444
+  testmodule:
+    image: registry.avalab.io/tokensale/autotests:develop
+    container_name: autotests
+    environment:
+      - host=selenium-hub
+    depends_on:
+      - chrome
+
+
+volumes:
+  chrome:
+    driver: local
+  testmodule:
+    driver: local
+  selenium-hub:
+    driver: local

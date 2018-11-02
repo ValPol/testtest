@@ -9,9 +9,12 @@ import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 
 public class WebDriverContainer {
@@ -58,29 +61,21 @@ public class WebDriverContainer {
 
     /**
      * Инициализирует статический экземпляр WebDriver.
+     * @throws java.net.MalformedURLException
      */
-    public void setDrivers() {
-
+    public void setDrivers() throws MalformedURLException {
         File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-        if (SystemUtils.IS_OS_LINUX) {
-            driverexe = new File("src/test/resources/drivers/chromedriver");
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
-        }
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(CapabilityType.ELEMENT_SCROLL_BEHAVIOR, ElementScrollBehavior.BOTTOM);
         capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
         capabilities.setBrowserName(BrowserType.CHROME);
 
-        ChromeDriverService service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(driverexe)
-                .usingAnyFreePort()
-                .build();
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
 
-        HashMap<String, Object> prefs = new HashMap<>();
+        HashMap<String, Object> prefs = new HashMap<String, Object>();
         // для автоматического скачивания файлов
         prefs.put("download.prompt_for_download", false);
         prefs.put("safebrowsing.enabled", true);
@@ -89,9 +84,17 @@ public class WebDriverContainer {
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         options.addArguments("--start-maximized");
         options.merge(capabilities);
-        driver = new ChromeDriver(service, options);
+        System.out.print(System.getProperty("host"));
+        if (SystemUtils.IS_OS_LINUX) {
+            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
+        } else {
+            ChromeDriverService service = new ChromeDriverService.Builder()
+                    .usingDriverExecutable(driverexe)
+                    .usingAnyFreePort()
+                    .build();
+            driver = new ChromeDriver(service, options);
+        }
         WebDriverRunner.setWebDriver(driver);
-
     }
 
     public static void CloseDrivers() {
