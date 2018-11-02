@@ -1,6 +1,4 @@
-package helpers;
-
-
+package main.java.helpers;
 
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
@@ -13,38 +11,44 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.apache.commons.lang3.SystemUtils;
 
-import javax.security.auth.login.Configuration;
 import java.io.File;
 import java.util.HashMap;
 
-
 public class WebDriverContainer {
+
     //
-    /*******************************************************************************************************************
+    /**
+     * *****************************************************************************************************************
      * Поля класса.
-     ******************************************************************************************************************/
+     * ****************************************************************************************************************
+     */
     // Статический экземпляр этого класса
     private static WebDriverContainer instance;
 
     // Статический экземпляр Selenium WebDriver
     private static WebDriver driver;
 
-
-    /*******************************************************************************************************************
-     *********** Методы класса ***************
-     ******************************************************************************************************************/
     /**
-     * Возвращает статический экземпляр этого класса (если класс еще не имеет экземпляра, то создает новый экземпляр).
+     * *****************************************************************************************************************
+     *********** Методы класса ***************
+     * ****************************************************************************************************************
+     */
+    /**
+     * Возвращает статический экземпляр этого класса (если класс еще не имеет
+     * экземпляра, то создает новый экземпляр).
      *
      * @return Статический экземпляр этого класса
      */
     public static synchronized WebDriverContainer getInstance() {
-        if (instance == null) instance = new WebDriverContainer();
+        if (instance == null) {
+            instance = new WebDriverContainer();
+        }
         return instance;
     }
 
     /**
-     * Возвращает статический экземпляр WebDriver (инициализирует его если он еще не инициализирован).
+     * Возвращает статический экземпляр WebDriver (инициализирует его если он
+     * еще не инициализирован).
      *
      * @return Статический экземпляр Selenium WebDriver
      */
@@ -55,22 +59,19 @@ public class WebDriverContainer {
     /**
      * Инициализирует статический экземпляр WebDriver.
      */
-
     public void setDrivers() {
 
         File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-        if (SystemUtils.IS_OS_LINUX){
-          driverexe = new File("src/test/resources/drivers/chromedriver");
-          System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+        if (SystemUtils.IS_OS_LINUX) {
+            driverexe = new File("src/test/resources/drivers/chromedriver");
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
         }
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(CapabilityType.ELEMENT_SCROLL_BEHAVIOR, ElementScrollBehavior.BOTTOM);
         capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
         capabilities.setBrowserName(BrowserType.CHROME);
-
-
 
         ChromeDriverService service = new ChromeDriverService.Builder()
                 .usingDriverExecutable(driverexe)
@@ -79,7 +80,7 @@ public class WebDriverContainer {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
 
-        HashMap<String, Object> prefs = new HashMap<String, Object>();
+        HashMap<String, Object> prefs = new HashMap<>();
         // для автоматического скачивания файлов
         prefs.put("download.prompt_for_download", false);
         prefs.put("safebrowsing.enabled", true);

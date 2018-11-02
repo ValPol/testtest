@@ -1,22 +1,9 @@
 stages:
-  - build
   - build-docker
   - deploy
 
 variables:
   APPLICATION_ARTIFACTS_PATH: /
-
-job_build:
-  stage: build
-  tags: [docker]
-  image: maven:3.3-jdk-8
-  script:
-    - chmod 777 /builds/Tokensale/Autotests/src/test/resources/drivers/chromedriver
-    - mvn clean package
-  artifacts:
-    expire_in: 2 hrs
-    paths:
-      - $APPLICATION_ARTIFACTS_PATH
 
 manual_build_docker:
   stage: build-docker
@@ -33,8 +20,6 @@ manual_build_docker:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
   only:
     - /^(feature.*)$/
-  dependencies:
-    - job_build
   when: manual
   
 auto_build_docker:
@@ -52,5 +37,3 @@ auto_build_docker:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
   only:
     - /^(master|develop|v*)$/
-  dependencies:
-    - job_build

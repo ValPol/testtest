@@ -1,4 +1,4 @@
-package PageUser;
+package main.java.PageUser;
 
 import org.openqa.selenium.By;
 
@@ -13,10 +13,7 @@ public class LogInPage extends CommonPage {
 
     private final String userPassword = "//input[@name=\"password\"]";
 
-
     private final String entrBtm = "//button[@type=\"submit\"]";
-
-
 
     //Выбор личного кабинета для работы
     public void setLoginCredentials(String credentials) {
@@ -30,13 +27,10 @@ public class LogInPage extends CommonPage {
                 delayAndSetValueForIdElement(userLogin, config.getConfigParameter("LoginOrganization"));
                 delayAndSetValueForIdElement(userPassword, config.getConfigParameter("PasswordOrganization"));
                 break;
-        }
+            }
         }
         $(By.xpath(entrBtm)).pressEnter();
-        
+
     }
-
-
-
 
 }

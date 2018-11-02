@@ -1,11 +1,11 @@
-package steps;
+package test.java.steps;
 
 import com.codeborne.selenide.junit.BrowserStrategy;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import helpers.ConfigContainer;
-import helpers.WebDriverContainer;
+import main.java.helpers.ConfigContainer;
+import main.java.helpers.WebDriverContainer;
 import org.junit.ClassRule;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

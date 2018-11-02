@@ -1,7 +1,6 @@
-package PageUser;
+package main.java.PageUser;
 
-import PageUser.AbstractPage;
-import helpers.ConfigContainer;
+import main.java.helpers.ConfigContainer;
 import org.openqa.selenium.*;
 
 import java.awt.*;

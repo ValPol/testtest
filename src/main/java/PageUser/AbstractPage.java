@@ -1,8 +1,8 @@
-package PageUser;
+package main.java.PageUser;
 
 import com.codeborne.selenide.SelenideElement;
-import helpers.ConfigContainer;
-import helpers.WebDriverContainer;
+import main.java.helpers.ConfigContainer;
+import main.java.helpers.WebDriverContainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;

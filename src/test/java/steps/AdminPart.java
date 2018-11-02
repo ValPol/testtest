@@ -1,6 +1,6 @@
-package steps;
+package test.java.steps;
 
-import PageUser.CommonPage;
+import main.java.PageUser.CommonPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -8,13 +8,11 @@ import cucumber.api.java.en.When;
 
 public class AdminPart extends CommonPage {
 
-
     @Given("^I have opened application admin login page$")
     public void iHaveOpenedApplicationAdminLoginPage() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
-
 
     @When("^I have opened KYC section$")
     public void iHaveOpenedKYCSection() throws Throwable {
@@ -40,6 +38,5 @@ public class AdminPart extends CommonPage {
         throw new PendingException();
 
     }
-
 
 }

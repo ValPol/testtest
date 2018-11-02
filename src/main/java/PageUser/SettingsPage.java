@@ -1,18 +1,12 @@
-package PageUser;
+package main.java.PageUser;
 
-import com.codeborne.selenide.Driver;
-import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.open;
 
 public class SettingsPage extends CommonPage {
 
@@ -40,21 +34,20 @@ public class SettingsPage extends CommonPage {
 
     private final String submitBtn = "button[type='submit']";
 
-
     public void getKYCForm() {
         $("#main-navigation");
         delayAndClickForCssElement(settingsPage);
         //open("http://tokensale.dev.avalab.io/settings/kyc");
         //Select settingsDrD = new Select(driver.findElement(By.xpath("//select[@name=\"settings\"]")));
-       // settingsDrD.selectByValue("kyc");
-       delayAndClickWithoutScrollForCssElement(verificationTab);
+        // settingsDrD.selectByValue("kyc");
+        delayAndClickWithoutScrollForCssElement(verificationTab);
     }
 
-    public void fillKYCForm(){
+    public void fillKYCForm() {
         delayAndSetValueForCSSElement(firstNameField, "John");
         delayAndSetValueForCSSElement(lastNameField, "John");
 
-      //  delayAndClickWithoutScrollForXpathElement("{//input[@value=\"male\"]//..");
+        //  delayAndClickWithoutScrollForXpathElement("{//input[@value=\"male\"]//..");
         delayAndSetValueForCSSElement(birthdayField, "01-01-2000");
         $(".Switcher_switcher_XqmzG label", 1).click();
         delayAndSetValueForCSSElement(phoneField, "1234456688");
@@ -63,27 +56,23 @@ public class SettingsPage extends CommonPage {
 
         Select dropDown = new Select(driver.findElement(By.cssSelector(countrySelect)));
         List<WebElement> options = dropDown.getOptions();
-        for(WebElement option : options)
-        {
-            if( option.getAttribute("value").equals("AL") )
-            {
+        for (WebElement option : options) {
+            if (option.getAttribute("value").equals("AL")) {
                 option.click();
                 break;
             }
         }
 
 //        delayAndClickWithoutScrollForCssElement(countrySelect);
-
-       // $(countrySelect).click();
-       // $(optionValue).click();
-
+        // $(countrySelect).click();
+        // $(optionValue).click();
         ///JavascriptExecutor js = (JavascriptExecutor) driver;
         //js.executeScript("document.querySelector(\"select[name='country']\").setAttribute('class', 'vf-dirty vf-valid vf-touched')");
         //$(countrySelect).sendKeys(Keys.ENTER);
-      //  $(countrySelect).sendKeys(Keys.ENTER);
-       // $(optionValue).sendKeys(Keys.ENTER);
-       // $(optionValue).click();
-   //     delayAndClickWithoutScrollForCssElement(countrySelect);
+        //  $(countrySelect).sendKeys(Keys.ENTER);
+        // $(optionValue).sendKeys(Keys.ENTER);
+        // $(optionValue).click();
+        //     delayAndClickWithoutScrollForCssElement(countrySelect);
         delayAndClickWithoutScrollForCssElement(submitBtn);
 
     }
