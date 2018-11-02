@@ -20,6 +20,8 @@ services:
       - host=selenium-hub
     depends_on:
       - chrome
+    volumes:
+      - testmodule/:/app/build/reports/tests:ro
 
 
 volumes:

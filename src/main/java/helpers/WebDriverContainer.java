@@ -61,6 +61,7 @@ public class WebDriverContainer {
 
     /**
      * Инициализирует статический экземпляр WebDriver.
+     *
      * @throws java.net.MalformedURLException
      */
     public void setDrivers() throws MalformedURLException {
@@ -75,7 +76,7 @@ public class WebDriverContainer {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
 
-        HashMap<String, Object> prefs = new HashMap<String, Object>();
+        HashMap<String, Object> prefs = new HashMap();
         // для автоматического скачивания файлов
         prefs.put("download.prompt_for_download", false);
         prefs.put("safebrowsing.enabled", true);
@@ -84,9 +85,8 @@ public class WebDriverContainer {
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         options.addArguments("--start-maximized");
         options.merge(capabilities);
-        System.out.print(System.getProperty("host"));
-        if (SystemUtils.IS_OS_LINUX) {
-            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
+        if (SystemUtils.IS_OS_LINUX && System.getProperty("host") != null) {
+            driver = new RemoteWebDriver(new URL("http://" + System.getProperty("host") + ":4444/wd/hub"), options);
         } else {
             ChromeDriverService service = new ChromeDriverService.Builder()
                     .usingDriverExecutable(driverexe)
