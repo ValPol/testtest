@@ -9,9 +9,9 @@ import java.util.Properties;
 public class ConfigContainer implements Serializable {
 
     // Относительный путь к файлу с настройками тестовой среды (параметризованный конфигурационный файл)
-    private static final String PROPERTIES_FILE_NAME = System.getProperty("user.dir") + "\\src\\test\\resources\\config\\";
+    private static final String PROPERTIES_FILE_NAME = "/src/test/resources/config/";
 
-    public static final String uploadFileUnformalizedDocumentExchange = "\\src\\test\\resources\\attachements\\exchangeDocumentForTest.txt";
+    public static final String uploadFileUnformalizedDocumentExchange = "/src/test/resources/attachements/exchangeDocumentForTest.txt";
 
     //------------------------------------------------------------------------------------------------------------------
     /**
@@ -39,7 +39,7 @@ public class ConfigContainer implements Serializable {
 
     // region Относительный путь к файлу с настройками тестовой среды
     private String getPropertiesFileName(String configName) {
-        String propertiesName = PROPERTIES_FILE_NAME + configName + ".properties";
+        String propertiesName = System.getProperty("user.dir") + PROPERTIES_FILE_NAME + configName + ".properties";
         return propertiesName;
     }
 
@@ -57,12 +57,13 @@ public class ConfigContainer implements Serializable {
      */
     /**
      * Загружает настройки тестовой среды из файла [config.properties].
+     *
      * @param configName
      */
     public void loadConfig(String configName) {
         InputStreamReader input = null;
         try {
-            input = new InputStreamReader(new FileInputStream(getPropertiesFileName(configName)), "windows-1251");
+            input = new InputStreamReader(new FileInputStream(getPropertiesFileName(configName)), "utf-8");
             properties.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
