@@ -11,6 +11,7 @@ job_build:
   tags: [docker]
   image: maven:3.3-jdk-8
   script:
+    - chmod 777 /builds/Tokensale/Autotests/src/test/resources/drivers/chromedriver
     - mvn clean package
   artifacts:
     expire_in: 2 hrs
