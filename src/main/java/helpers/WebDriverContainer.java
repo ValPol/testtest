@@ -63,8 +63,12 @@ public class WebDriverContainer {
         capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
         capabilities.setBrowserName(BrowserType.CHROME);
 
+        File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
+        if (!driverexe.canRead())
+          driverexe = new File("src/test/resources/drivers/chromedriver");
+
         ChromeDriverService service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("src/test/resources/drivers/chromedriver.exe"))
+                .usingDriverExecutable(driverexe)
                 .usingAnyFreePort()
                 .build();
         ChromeOptions options = new ChromeOptions();
