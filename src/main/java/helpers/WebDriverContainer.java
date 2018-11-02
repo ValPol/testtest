@@ -11,6 +11,7 @@ import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.apache.commons.lang3.SystemUtils;
 
 import javax.security.auth.login.Configuration;
 import java.io.File;
@@ -57,21 +58,27 @@ public class WebDriverContainer {
 
     public void setDrivers() {
 
+        File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+        if (SystemUtils.IS_OS_LINUX){
+          driverexe = new File("src/test/resources/drivers/chromedriver");
+          System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+        }
+
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(CapabilityType.ELEMENT_SCROLL_BEHAVIOR, ElementScrollBehavior.BOTTOM);
         capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
         capabilities.setBrowserName(BrowserType.CHROME);
 
-        File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
-        if (!driverexe.canRead())
-          driverexe = new File("src/test/resources/drivers/chromedriver");
+
 
         ChromeDriverService service = new ChromeDriverService.Builder()
                 .usingDriverExecutable(driverexe)
                 .usingAnyFreePort()
                 .build();
         ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true);
+
         HashMap<String, Object> prefs = new HashMap<String, Object>();
         // для автоматического скачивания файлов
         prefs.put("download.prompt_for_download", false);
@@ -83,7 +90,6 @@ public class WebDriverContainer {
         options.merge(capabilities);
         driver = new ChromeDriver(service, options);
         WebDriverRunner.setWebDriver(driver);
-
 
     }
 
