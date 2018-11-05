@@ -1,4 +1,4 @@
-package steps;
+package test.java.steps;
 
 
 import cucumber.api.CucumberOptions;
@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         plugin = {"pretty", "html:target/site/cucumber-pretty", "json:target/cucumber.json"},
-        tags = {"~@ignore"}
+        tags = {"not @ignore"}
 )
 
 public class CucumberRunnerTest {

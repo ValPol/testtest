@@ -1,14 +1,14 @@
-package steps;
+package test.java.steps;
 
-import PageUser.CommonPage;
-import PageUser.LogInPage;
-import PageUser.SettingsPage;
+import main.java.PageUser.CommonPage;
+import main.java.PageUser.LogInPage;
+import main.java.PageUser.SettingsPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import helpers.ConfigContainer;
+import main.java.helpers.ConfigContainer;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -17,7 +17,6 @@ public class ClientPart extends CommonPage {
     LogInPage page;
     ConfigContainer config = new ConfigContainer();
     SettingsPage settingsPage = new SettingsPage();
-
 
     @Given("^I have opened application log in page$")
     public void iHaveOpenedApplicationLogInPage() throws Throwable {

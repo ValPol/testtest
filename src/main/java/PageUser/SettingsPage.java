@@ -1,14 +1,9 @@
 package PageUser;
 
-import com.codeborne.selenide.Driver;
-import net.bytebuddy.asm.Advice;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+import main.java.CommonPage;
 
-import java.util.List;
+import org.openqa.selenium.Keys;
+
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -44,7 +39,7 @@ public class SettingsPage extends CommonPage {
         delayAndClickWithoutScrollForCssElement(verificationTab);
     }
 
-    public void fillKYCForm() {
+    public void fillKYCForm() throws InterruptedException {
         delayAndSetValueForCSSElement(firstNameField, "John");
         delayAndSetValueForCSSElement(lastNameField, "John");
         $(countrySelect).sendKeys(Keys.ARROW_DOWN);
@@ -52,17 +47,20 @@ public class SettingsPage extends CommonPage {
          * Способ установки значения дропдауна через js
          js.executeScript("var select = document.querySelector('select[name=\"country\"]');" +"select.value = \"RU\";select.dispatchEvent(new Event('input', { bubbles: true }));");
          */
-        delayAndSendKeysForCssElement(birthdayField, "01-01-2000");
+        while ($(birthdayField).getValue().compareToIgnoreCase("10-10-2010") != 0) {
+            delayAndSendKeysForCssElement(birthdayField, "10-10-2010");
+            waitSomeSeconds(1);
+        }
         delayAndClickForCssElement(maleGendeRBtn);
         delayAndSetValueForCSSElement(phoneField, "1234456688");
         delayAndSendKeysForCssElement(fileInput, System.getProperty("user.dir") + "\\src\\test\\resources\\test.jpg");
-        existForXpathElement("//div[text()=\"ID scan\"]");
+        existForXpathElement("//div[text()=\"test.jpg\"]");
         delayAndClickWithoutScrollForCssElement(agreeChB);
         delayAndClickWithoutScrollForCssElement(submitBtn);
     }
 
     public void kycFormPosted() {
-        //$(phoneField).waitUntil(driver.findElement(By.cssSelector(phoneField)).getAttribute("value").equals(""), 50000, 10);
+        disappearForXpathElement("//div[text()=\"test.jpg\"]");
     }
 
 }

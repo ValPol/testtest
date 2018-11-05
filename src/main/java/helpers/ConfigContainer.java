@@ -1,4 +1,4 @@
-package helpers;
+package main.java.helpers;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,21 +6,21 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Properties;
 
-
 public class ConfigContainer implements Serializable {
 
     // Относительный путь к файлу с настройками тестовой среды (параметризованный конфигурационный файл)
-    private static final String PROPERTIES_FILE_NAME = System.getProperty("user.dir") + "\\src\\test\\resources\\config\\";
+    private static final String PROPERTIES_FILE_NAME = "/src/test/resources/config/";
 
-    public static final String uploadFileUnformalizedDocumentExchange = "\\src\\test\\resources\\attachements\\exchangeDocumentForTest.txt";
+    public static final String uploadFileUnformalizedDocumentExchange = "/src/test/resources/attachements/exchangeDocumentForTest.txt";
 
     //------------------------------------------------------------------------------------------------------------------
-    /******************************************************************************************************************
+    /**
+     * ****************************************************************************************************************
      *
-     *                                            Поля класса
+     * Поля класса
      *
-     ******************************************************************************************************************/
-
+     *****************************************************************************************************************
+     */
     // Статический экземпляр этого класса (собственно сам ConfigContainer)
     private static ConfigContainer instance;
 
@@ -31,13 +31,15 @@ public class ConfigContainer implements Serializable {
      * Методы доступа к экземпляру этого класса
      */
     public static synchronized ConfigContainer getInstance() {
-        if (instance == null) instance = new ConfigContainer();
+        if (instance == null) {
+            instance = new ConfigContainer();
+        }
         return instance;
     }
 
     // region Относительный путь к файлу с настройками тестовой среды
     private String getPropertiesFileName(String configName) {
-        String propertiesName = PROPERTIES_FILE_NAME + configName + ".properties";
+        String propertiesName = System.getProperty("user.dir") + PROPERTIES_FILE_NAME + configName + ".properties";
         return propertiesName;
     }
 
@@ -46,19 +48,22 @@ public class ConfigContainer implements Serializable {
         return properties.getProperty(key);
     }
 
-    /******************************************************************************************************************
+    /**
+     * ****************************************************************************************************************
      *
-     *                                           Методы класса
+     * Методы класса
      *
-     ******************************************************************************************************************/
-
+     *****************************************************************************************************************
+     */
     /**
      * Загружает настройки тестовой среды из файла [config.properties].
+     *
+     * @param configName
      */
     public void loadConfig(String configName) {
         InputStreamReader input = null;
         try {
-            input = new InputStreamReader(new FileInputStream(getPropertiesFileName(configName)), "windows-1251");
+            input = new InputStreamReader(new FileInputStream(getPropertiesFileName(configName)), "utf-8");
             properties.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -73,15 +78,13 @@ public class ConfigContainer implements Serializable {
         }
     }
 
-
     /**
-     * Выбор файла конфигурации
-     * "stable_servicing" - для стандартного прогона тестов
-     * "production" - смоук на бою
-     * "entranceSettings" - входные конфиги, которые формирует множество кабинетов и организаций в новом окружении
+     * Выбор файла конфигурации "stable_servicing" - для стандартного прогона
+     * тестов "production" - смоук на бою "entranceSettings" - входные конфиги,
+     * которые формирует множество кабинетов и организаций в новом окружении
+     *
      * @return имя файла конфигурации
      */
-
     public String getConfigName() {
         String configName = System.getenv("EDO_AUTOTEST_CONFIG");
         System.out.println(" [-]: SYSTEM ENV variable EDO_AUTOTEST_CONFIG is : '" + configName + "'.");
@@ -91,9 +94,8 @@ public class ConfigContainer implements Serializable {
         return configName;
     }
 
-    public void setProperties(String field, String newValue){
-        properties.setProperty(field,newValue);
+    public void setProperties(String field, String newValue) {
+        properties.setProperty(field, newValue);
     }
-
 
 }
