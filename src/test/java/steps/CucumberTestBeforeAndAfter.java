@@ -32,6 +32,8 @@ public class CucumberTestBeforeAndAfter {
 
     /**
      * Код, который выполняется до каждого сценария.
+     * @throws java.net.MalformedURLException
+     * @throws java.net.UnknownHostException
      */
     @Before
     public void setUp() throws MalformedURLException, UnknownHostException {
@@ -42,6 +44,8 @@ public class CucumberTestBeforeAndAfter {
 
     /**
      * Код, который выполняется после каждого сценария.
+     * @param scenario
+     * @throws java.lang.Exception
      */
     @After
     public void tearDown(Scenario scenario) throws Exception {

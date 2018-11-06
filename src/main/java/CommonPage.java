@@ -1,7 +1,6 @@
 package main.java;
 
 
-import main.java.AbstractPage;
 import main.java.helpers.ConfigContainer;
 import org.openqa.selenium.*;
 
@@ -38,6 +37,8 @@ public class CommonPage extends AbstractPage {
 
     /*******************************************************************************************************************
      *           Метода взаиможействия с элементами по id или xpath
+     * @param path
+     * @return 
      ******************************************************************************************************************/
 
     public boolean visibilityForCssElement(String path){
@@ -167,6 +168,7 @@ public class CommonPage extends AbstractPage {
      * Установка фокуса на требуемом элементе
      *
      * @param path - xpath элемента
+     * @throws java.lang.InterruptedException
      */
     public void scrollToTheXpathElement(String path) throws InterruptedException {
         TimeUnit.MILLISECONDS.sleep(DELAY_INTERVAL * 10);

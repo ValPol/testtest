@@ -29,6 +29,7 @@ public class ConfigContainer implements Serializable {
 
     /**
      * Методы доступа к экземпляру этого класса
+     * @return 
      */
     public static synchronized ConfigContainer getInstance() {
         if (instance == null) {
