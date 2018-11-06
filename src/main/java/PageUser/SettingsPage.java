@@ -53,7 +53,7 @@ public class SettingsPage extends CommonPage {
         }
         delayAndClickForCssElement(maleGendeRBtn);
         delayAndSetValueForCSSElement(phoneField, "1234456688");
-        delayAndSendKeysForCssElement(fileInput, System.getProperty("user.dir") + "\\src\\test\\resources\\test.jpg");
+        delayAndSendKeysForCssElement(fileInput, System.getProperty("user.dir") + "/src/test/resources/test.jpg");
         existForXpathElement("//div[text()=\"test.jpg\"]");
         delayAndClickWithoutScrollForCssElement(agreeChB);
         delayAndClickWithoutScrollForCssElement(submitBtn);
