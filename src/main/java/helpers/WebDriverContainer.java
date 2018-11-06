@@ -72,8 +72,8 @@ public class WebDriverContainer {
         File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
 
-        String host = System.getProperty("host");
-        String browser = System.getProperty("browser");
+        String host = System.getenv("host");
+        String browser = System.getenv("browser");
         MutableCapabilities options;
 
         if (browser == null) {

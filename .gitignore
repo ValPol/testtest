@@ -13,8 +13,11 @@ bld/
 [Ta]rget/
 target
 [Oo]bj/
+.settings/
 
+/repository
 /dist
+repository
 
 # local env files
 .env.local

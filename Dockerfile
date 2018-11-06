@@ -5,5 +5,6 @@ COPY ./ /app
 WORKDIR /app
 # Command line to execute the test
 RUN ls
+RUN mvn compile -s settings.xml
 
-ENTRYPOINT ["mvn", "test"]
+ENTRYPOINT ["mvn", "test", "-s", "settings.xml"]
