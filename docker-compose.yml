@@ -13,21 +13,43 @@ services:
     environment:
       - HUB_PORT_4444_TCP_ADDR=selenium-hub
       - HUB_PORT_4444_TCP_PORT=4444
-  testmodule:
+  firefox:
+    image: selenium/node-firefox
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=selenium-hub
+      - HUB_PORT_4444_TCP_PORT=4444
+  testmodule-chrome:
     image: registry.avalab.io/tokensale/autotests:develop
     container_name: autotests
     environment:
       - host=selenium-hub
+      - browser=chrome
     depends_on:
       - chrome
     volumes:
-      - ./testmodule/:/app/build/reports/tests:rw
+      - ./reports/chrome/:/app/build/reports/tests:rw
+  testmodule-firefox:
+    image: registry.avalab.io/tokensale/autotests:develop
+    container_name: autotests
+    environment:
+      - host=selenium-hub
+      - browser=firefox
+    depends_on:
+      - firefox
+    volumes:
+      - ./reports/firefox/:/app/build/reports/tests:rw
 
 
 volumes:
   chrome:
     driver: local
-  testmodule:
+  firefox:
     driver: local
   selenium-hub:
+    driver: local
+  testmodule-chrome:
+    driver: local
+  testmodule-firefox:
     driver: local
