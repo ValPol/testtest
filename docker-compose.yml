@@ -29,7 +29,8 @@ services:
     depends_on:
       - chrome
     volumes:
-      - ./reports/chrome/:/app/build/reports/tests:rw
+      - ./reports/chrome/png/:/app/build/reports/tests:rw
+      - ./reports/chrome/:/app/target/site/cucumber-pretty:rw
   testmodule-firefox:
     image: registry.avalab.io/tokensale/autotests:develop
     container_name: autotests-firefox
@@ -39,7 +40,8 @@ services:
     depends_on:
       - firefox
     volumes:
-      - ./reports/firefox/:/app/build/reports/tests:rw
+      - ./reports/firefox/png/:/app/build/reports/tests:rw
+      - ./reports/firefox/:/app/target/site/cucumber-pretty:rw
 
 
 volumes:
