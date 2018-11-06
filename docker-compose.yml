@@ -21,7 +21,7 @@ services:
     depends_on:
       - chrome
     volumes:
-      - testmodule/:/app/build/reports/tests:ro
+      - ./testmodule/:/app/build/reports/tests:rw
 
 
 volumes:

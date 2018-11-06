@@ -1,16 +1,18 @@
 package main.java.helpers;
 
 import com.codeborne.selenide.WebDriverRunner;
+
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.apache.commons.lang3.SystemUtils;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -65,38 +67,73 @@ public class WebDriverContainer {
      * @throws java.net.MalformedURLException
      */
     public void setDrivers() throws MalformedURLException {
+        DesiredCapabilities capabilities;
+
         File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-        String host = System.getProperty("host");
 
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        String host = System.getProperty("host");
+        String browser = System.getProperty("browser");
+        MutableCapabilities options;
+
+        if (browser == null) {
+            browser = "chrome";
+        }
+        switch (browser.trim().toLowerCase()) {
+            case "firefox": {
+                capabilities = DesiredCapabilities.firefox();
+                capabilities.setBrowserName(BrowserType.FIREFOX);
+                options = getFirefoxOptions();
+                break;
+            }
+            case "chrome":
+            default: {
+                capabilities = DesiredCapabilities.chrome();
+                capabilities.setBrowserName(BrowserType.CHROME);
+                options = getChromeOptions();
+                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                break;
+            }
+        }
+
         capabilities.setCapability(CapabilityType.ELEMENT_SCROLL_BEHAVIOR, ElementScrollBehavior.BOTTOM);
         capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-        capabilities.setBrowserName(BrowserType.CHROME);
 
+        options.merge(capabilities);
+
+        if (host != null) {
+            driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), options);
+        } else {
+            ChromeDriverService service = new ChromeDriverService.Builder().usingDriverExecutable(driverexe)
+                    .usingAnyFreePort().build();
+            driver = new ChromeDriver(service, (ChromeOptions) options);
+        }
+        WebDriverRunner.setWebDriver(driver);
+    }
+
+    private ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
-
+        options.setHeadless(System.getProperty("host") != null);
         HashMap<String, Object> prefs = new HashMap();
         // для автоматического скачивания файлов
         prefs.put("download.prompt_for_download", false);
         prefs.put("safebrowsing.enabled", true);
         prefs.put("download.default_directory", System.getProperty("user.dir") + "/src/test/resources/download");
         options.setExperimentalOption("prefs", prefs);
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        options.addArguments("--start-maximized");
-        options.merge(capabilities);
+        options.addArguments("--window-size=1920,1080");
+        return options;
+    }
 
-        if (SystemUtils.IS_OS_LINUX && host != null) {
-            driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), options);
-        } else {
-            ChromeDriverService service = new ChromeDriverService.Builder()
-                    .usingDriverExecutable(driverexe)
-                    .usingAnyFreePort()
-                    .build();
-            driver = new ChromeDriver(service, options);
-        }
-        WebDriverRunner.setWebDriver(driver);
+    private FirefoxOptions getFirefoxOptions() {
+        FirefoxOptions options = new FirefoxOptions();
+        HashMap<String, Object> prefs = new HashMap();
+        options.setHeadless(System.getProperty("host") != null);
+        // для автоматического скачивания файлов
+        prefs.put("download.prompt_for_download", false);
+        prefs.put("safebrowsing.enabled", true);
+        prefs.put("download.default_directory", System.getProperty("user.dir") + "/src/test/resources/download");
+        options.addArguments("window-size=1920,1080");
+        return options;
     }
 
     public static void CloseDrivers() {
