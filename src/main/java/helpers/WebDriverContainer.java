@@ -67,6 +67,7 @@ public class WebDriverContainer {
     public void setDrivers() throws MalformedURLException {
         File driverexe = new File("src/test/resources/drivers/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
+        String host = System.getProperty("host");
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(CapabilityType.ELEMENT_SCROLL_BEHAVIOR, ElementScrollBehavior.BOTTOM);
@@ -80,13 +81,14 @@ public class WebDriverContainer {
         // для автоматического скачивания файлов
         prefs.put("download.prompt_for_download", false);
         prefs.put("safebrowsing.enabled", true);
-        prefs.put("download.default_directory", System.getProperty("user.dir") + "\\src\\test\\resources\\download");
+        prefs.put("download.default_directory", System.getProperty("user.dir") + "/src/test/resources/download");
         options.setExperimentalOption("prefs", prefs);
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         options.addArguments("--start-maximized");
         options.merge(capabilities);
-        if (SystemUtils.IS_OS_LINUX && System.getProperty("host") != null) {
-            driver = new RemoteWebDriver(new URL("http://" + System.getProperty("host") + ":4444/wd/hub"), options);
+
+        if (SystemUtils.IS_OS_LINUX && host != null) {
+            driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), options);
         } else {
             ChromeDriverService service = new ChromeDriverService.Builder()
                     .usingDriverExecutable(driverexe)

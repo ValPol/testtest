@@ -51,7 +51,7 @@ public class SettingsPage extends CommonPage {
         delayAndSetValueForCSSElement(birthdayField, "01-01-2000");
         $(".Switcher_switcher_XqmzG label", 1).click();
         delayAndSetValueForCSSElement(phoneField, "1234456688");
-        delayAndSendKeysForCssElement(fileInput, System.getProperty("user.dir") + "\\src\\test\\resources\\test.jpg");
+        delayAndSendKeysForCssElement(fileInput, System.getProperty("user.dir") + "/src/test/resources/test.jpg");
         delayAndClickWithoutScrollForCssElement(agreeChB);
 
         Select dropDown = new Select(driver.findElement(By.cssSelector(countrySelect)));
