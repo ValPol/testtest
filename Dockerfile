@@ -6,4 +6,4 @@ WORKDIR /app
 # Command line to execute the test
 RUN ls
 
-ENTRYPOINT ["mvn", "clean", "package"]
+ENTRYPOINT ["mvn", "test"]
