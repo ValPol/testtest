@@ -25,7 +25,7 @@ Feature: KYC send and approve/decline feature
   #=====================================================================================================================
   #                                       Отправка заполненной формы KYC клиентом
   #=====================================================================================================================
-  Scenario: User send KYC-request for administrator
+  Scenario: User send KYC-request for administrator 2
     Given I have opened application log in page
     When I have select signature "1"
     When I have opened KYC-form

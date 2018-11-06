@@ -1,4 +1,4 @@
-package main.java.PageUser;
+package main.java;
 
 import com.codeborne.selenide.SelenideElement;
 import main.java.helpers.ConfigContainer;
@@ -49,6 +49,7 @@ public abstract class AbstractPage {
 
     /**
      * Возвращается на предыдущую страницу.
+     * @throws java.lang.Throwable
      */
     public void goToBackTab() throws Throwable {
         driver.navigate().back();
@@ -61,6 +62,7 @@ public abstract class AbstractPage {
      *
      * @param by    как искать поле на странице (id, xpath, css и т.д.)
      * @param value значение поля, которое следует установить
+     * @throws java.lang.InterruptedException
      */
     protected void setValueToTextField(By by, String value) throws InterruptedException {
         // Число попыток установки значения поля
@@ -108,6 +110,7 @@ public abstract class AbstractPage {
      * @param openList      поле со свернутым списком, отображающее выбранное значение
      * @param input         раскрытый список возможных значений поля
      * @param valueToSelect значение поля, которое требуется выбрать в списке
+     * @throws java.lang.Exception
      */
     protected void selectValueFromList(SelenideElement openList, SelenideElement input,
                                        String valueToSelect) throws Exception {
@@ -123,6 +126,7 @@ public abstract class AbstractPage {
 
     /**
      * Возвращает текущую дату в виде строки заданного формата.
+     * @return 
      */
     protected String getCurrentDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HHmmSS");
@@ -131,6 +135,7 @@ public abstract class AbstractPage {
 
     /**
      * Возвращает текущую дату в виде строки заданного формата.
+     * @return 
      */
     protected String getCurrentDateTimeWithoutSeconds() {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -144,6 +149,7 @@ public abstract class AbstractPage {
 
     /**
      * Возвращает текущую дату в виде строки заданного формата.
+     * @return 
      */
     protected String getCurrentDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -174,6 +180,7 @@ public abstract class AbstractPage {
      *
      * @param amountOfDays - кол-во дней на которое уменьшается дата
      * @return - возвращает дату
+     * @throws java.lang.Exception
      */
     protected String getDateAgo(int amountOfDays) throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -190,6 +197,7 @@ public abstract class AbstractPage {
      * Ожидает появления кнопки и нажимает ее.
      *
      * @param button локатор нажимаемой кнопки
+     * @throws java.lang.Exception
      */
     protected void clickButton(By button) throws Exception {
         $(button).waitUntil(exist, delayTimeMs, pollingIntervalMs).click();
@@ -199,6 +207,7 @@ public abstract class AbstractPage {
      * Ожидает появления кнопки и нажимает ее.
      *
      * @param button локатор нажимаемой кнопки
+     * @throws java.lang.Exception
      */
     protected void clickButton(SelenideElement button) throws Exception {
         button.waitUntil(exist, delayTimeMs, pollingIntervalMs).click();
@@ -214,6 +223,7 @@ public abstract class AbstractPage {
      * Устанавливает фокус в поля типа "kendoNumericTextBox" с помощью JS.
      *
      * @param idLocator - id локатор элемента
+     * @throws java.lang.Exception
      */
     protected void setFocusInKendoNumericTextBoxJS(String idLocator) throws Exception {
         String script = "$(\"#" + idLocator + "\").data(\"kendoNumericTextBox\").focus();";
@@ -224,6 +234,7 @@ public abstract class AbstractPage {
      * Делает клик по элементу страницы используя By с помощью JS.
      *
      * @param by элемент по которому следует кликнуть
+     * @throws java.lang.Exception
      */
     protected void clickInElementJS(By by) throws Exception {
         SelenideElement element = $(by);
@@ -234,6 +245,7 @@ public abstract class AbstractPage {
      * Делает нажатие по элементу страницы используя SelenideElement с помощью JS.
      *
      * @param element - элемент по которому следует кликнуть
+     * @throws java.lang.Exception
      */
     protected void clickInElementJS(SelenideElement element) throws Exception {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
@@ -245,6 +257,7 @@ public abstract class AbstractPage {
      * Делает скролл к элементу страницы используя By с помощью JS.
      *
      * @param element - элемент по которому следует кликнуть
+     * @throws java.lang.Exception
      */
     protected void scrollToElementJS(SelenideElement element) throws Exception {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
@@ -256,6 +269,7 @@ public abstract class AbstractPage {
      *
      * @param element - элемент SelenideElement
      * @param value   - значение
+     * @throws java.lang.Exception
      */
     protected void setValueInElementJS(SelenideElement element, String value) throws Exception {
         String script = String.format("arguments[0].value = '%s';", value);
@@ -267,6 +281,7 @@ public abstract class AbstractPage {
      *
      * @param idLocator строковый Id элемента для которого следует установить значение
      * @param value     требуемое значение элемента
+     * @throws java.lang.Exception
      */
     protected void setValueInElementJS(String idLocator, String value) throws Exception {
         String script = "document.getElementById(\"" + idLocator + "\").value=\"" + value + "\";";
@@ -300,6 +315,7 @@ public abstract class AbstractPage {
      * @param attribute аттрибут для поиска такого элемента
      * @param idLocator значение аттрибута
      * @param value     значение для установки
+     * @throws java.lang.Exception
      */
     protected void setValueInElementJQ(String element, String attribute, String idLocator, String value) throws Exception {
         String script = "$(\"" + element + "[" + attribute + "='" + idLocator + "']\").val('" + value + "');";

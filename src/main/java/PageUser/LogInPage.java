@@ -3,6 +3,7 @@ package main.java.PageUser;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import main.java.CommonPage;
 
 /**
  * Страница логина
