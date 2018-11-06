@@ -22,7 +22,7 @@ services:
       - HUB_PORT_4444_TCP_PORT=4444
   testmodule-chrome:
     image: registry.avalab.io/tokensale/autotests:develop
-    container_name: autotests
+    container_name: autotests-chrome
     environment:
       - host=selenium-hub
       - browser=chrome
@@ -32,7 +32,7 @@ services:
       - ./reports/chrome/:/app/build/reports/tests:rw
   testmodule-firefox:
     image: registry.avalab.io/tokensale/autotests:develop
-    container_name: autotests
+    container_name: autotests-firefox
     environment:
       - host=selenium-hub
       - browser=firefox
