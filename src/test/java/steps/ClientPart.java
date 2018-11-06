@@ -1,13 +1,14 @@
 package test.java.steps;
 
-import main.java.PageUser.CommonPage;
+
+import main.java.CommonPage;
 import main.java.PageUser.LogInPage;
-import main.java.PageUser.SettingsPage;
-import cucumber.api.PendingException;
+
 import cucumber.api.java.en.Given;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import main.java.PageUser.SettingsPage;
 import main.java.helpers.ConfigContainer;
 
 import static com.codeborne.selenide.Selenide.open;

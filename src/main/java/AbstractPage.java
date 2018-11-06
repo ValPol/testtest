@@ -1,4 +1,4 @@
-package main.java.PageUser;
+package main.java;
 
 import com.codeborne.selenide.SelenideElement;
 import main.java.helpers.ConfigContainer;

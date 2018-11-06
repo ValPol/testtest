@@ -1,5 +1,6 @@
 package main.java.PageUser;
 
+import main.java.CommonPage;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -18,14 +19,14 @@ public class LogInPage extends CommonPage {
     //Выбор личного кабинета для работы
     public void setLoginCredentials(String credentials) {
         switch (credentials) {
-            case "1": {
+            case "user": {
                 delayAndSetValueForXpathElement(userLogin, "testestestfortest1@yopmail.com");
                 delayAndSetValueForXpathElement(userPassword, "qwe123QWE");
                 break;
             }
-            case "2": {
-                delayAndSetValueForIdElement(userLogin, config.getConfigParameter("LoginOrganization"));
-                delayAndSetValueForIdElement(userPassword, config.getConfigParameter("PasswordOrganization"));
+            case "admin": {
+                delayAndSetValueForIdElement(userLogin, "admin@tokensale.local");
+                delayAndSetValueForIdElement(userPassword, "123");
                 break;
             }
         }

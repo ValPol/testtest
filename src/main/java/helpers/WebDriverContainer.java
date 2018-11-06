@@ -74,7 +74,23 @@ public class WebDriverContainer {
         capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
         capabilities.setBrowserName(BrowserType.CHROME);
 
+        ChromeDriverService service = new ChromeDriverService.Builder()
+                .usingDriverExecutable(new File("src/test/resources/drivers/chromedriver.exe"))
+                .usingAnyFreePort()
+                .build();
         ChromeOptions options = new ChromeOptions();
+        HashMap<String, Object> prefs = new HashMap<String, Object>();
+        // для автоматического скачивания файлов
+        prefs.put("download.prompt_for_download", false);
+        prefs.put("safebrowsing.enabled", true);
+        prefs.put("download.default_directory", System.getProperty("user.dir") + "\\src\\test\\resources\\download");
+        options.setExperimentalOption("prefs", prefs);
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+        options.addArguments("--start-maximized");
+        options.merge(capabilities);
+        driver = new ChromeDriver(service, options);
+        WebDriverRunner.setWebDriver(driver);
+    /*    ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
 
         HashMap<String, Object> prefs = new HashMap();
@@ -96,7 +112,7 @@ public class WebDriverContainer {
                     .build();
             driver = new ChromeDriver(service, options);
         }
-        WebDriverRunner.setWebDriver(driver);
+        WebDriverRunner.setWebDriver(driver);*/
     }
 
     public static void CloseDrivers() {

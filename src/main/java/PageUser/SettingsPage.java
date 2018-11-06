@@ -1,4 +1,4 @@
-package PageUser;
+package main.java.PageUser;
 
 import main.java.CommonPage;
 
