@@ -54,9 +54,9 @@ public class SettingsPage extends CommonPage {
             public boolean Run() throws InterruptedException {
                 delayAndSendKeysForCssElement(birthdayField, "");
                 waitSomeSeconds(2);
-                delayAndSendKeysForCssElement(birthdayField, "10/10/2010");
+                delayAndSendKeysForCssElement(birthdayField, "2010-10-10");
                 waitSomeSeconds(1);
-                return $(birthdayField).getValue().compareToIgnoreCase("10/10/2010") == 0;
+                return $(birthdayField).getValue().compareToIgnoreCase("2010-10-10") == 0;
             }
         });
 
