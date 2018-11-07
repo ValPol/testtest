@@ -48,8 +48,8 @@ public class SettingsPage extends CommonPage {
          * +"select.value = \"RU\";select.dispatchEvent(new Event('input', {
          * bubbles: true }));");
          */
-        while ($(birthdayField).getValue().compareToIgnoreCase("10-10-2010") != 0) {
-            delayAndSendKeysForCssElement(birthdayField, "10-10-2010");
+        while ($(birthdayField).getValue().compareToIgnoreCase("10/10/2010") != 0) {
+            delayAndSendKeysForCssElement(birthdayField, "10/10/2010");
             waitSomeSeconds(1);
         }
         delayAndClickForCssElement(maleGendeRBtn);
