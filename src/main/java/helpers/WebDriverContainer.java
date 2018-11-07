@@ -18,6 +18,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import org.openqa.selenium.remote.LocalFileDetector;
 
 public class WebDriverContainer {
 
@@ -103,6 +104,7 @@ public class WebDriverContainer {
 
         if (host != null) {
             driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), options);
+            ((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
         } else {
             ChromeDriverService service = new ChromeDriverService.Builder().usingDriverExecutable(driverexe)
                     .usingAnyFreePort().build();
