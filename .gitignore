@@ -13,6 +13,7 @@ bld/
 [Ta]rget/
 target
 [Oo]bj/
+reports/
 .settings/
 
 /repository
