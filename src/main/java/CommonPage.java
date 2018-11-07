@@ -1,6 +1,6 @@
 package main.java;
 
-
+import main.IAction;
 import main.java.helpers.ConfigContainer;
 import org.openqa.selenium.*;
 
@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-
 public class CommonPage extends AbstractPage {
+
     protected ConfigContainer config = ConfigContainer.getInstance();
     private final static int DELAY_MAX = 180000;
     private final static int DELAY_INTERVAL = 500;
@@ -28,28 +28,32 @@ public class CommonPage extends AbstractPage {
     JavascriptExecutor js = (JavascriptExecutor) driver;
     String script = "";
 
-    /*******************************************************************************************************************
+    /**
+     * *****************************************************************************************************************
      * Конструктор класса.
-     ******************************************************************************************************************/
+     * ****************************************************************************************************************
+     */
     public CommonPage() {
         super();
     }
 
-    /*******************************************************************************************************************
-     *           Метода взаиможействия с элементами по id или xpath
+    /**
+     * *****************************************************************************************************************
+     * Метода взаиможействия с элементами по id или xpath
+     *
      * @param path
-     * @return 
-     ******************************************************************************************************************/
-
-    public boolean visibilityForCssElement(String path){
-       return $(By.cssSelector(path)).isDisplayed();
+     * @return
+     * ****************************************************************************************************************
+     */
+    public boolean visibilityForCssElement(String path) {
+        return $(By.cssSelector(path)).isDisplayed();
     }
 
-    public boolean visibilityForXpathElement(String path){
+    public boolean visibilityForXpathElement(String path) {
         return $(By.xpath(path)).isDisplayed();
     }
 
-    public boolean visibilityForIdElement(String path){
+    public boolean visibilityForIdElement(String path) {
         return $(By.id(path)).isDisplayed();
     }
 
@@ -102,6 +106,13 @@ public class CommonPage extends AbstractPage {
 
     public void delayAndSendKeysForCssElement(String path, String value) {
         $(By.cssSelector(path)).waitUntil(exist, DELAY_MAX, DELAY_INTERVAL).sendKeys(value);
+    }
+
+    public void doWhile(IAction action) throws InterruptedException {
+        Integer count = 0;
+        do {
+            count++;
+        } while (!action.Run() && count < 30);
     }
 
     public void delayAndSetValueWithoutScrollForIdElement(String path, String value) {
@@ -164,8 +175,8 @@ public class CommonPage extends AbstractPage {
     }
 
     /**
-     * scrollToTheXpathElement(String path)
-     * Установка фокуса на требуемом элементе
+     * scrollToTheXpathElement(String path) Установка фокуса на требуемом
+     * элементе
      *
      * @param path - xpath элемента
      * @throws java.lang.InterruptedException
@@ -182,8 +193,7 @@ public class CommonPage extends AbstractPage {
     }
 
     /**
-     * executeJS(String jsScript)
-     * Для выполнения любого js
+     * executeJS(String jsScript) Для выполнения любого js
      *
      * @param jsScript - подготовленный jscript
      */
@@ -196,8 +206,8 @@ public class CommonPage extends AbstractPage {
     }
 
     /**
-     * executeAndReturnState(String jsScript)
-     * Возвращает отвёт после испольнение jscript типа Boolean
+     * executeAndReturnState(String jsScript) Возвращает отвёт после испольнение
+     * jscript типа Boolean
      *
      * @param jsScript
      * @return Boolean
@@ -214,8 +224,8 @@ public class CommonPage extends AbstractPage {
     }
 
     /**
-     * executeAndReturnValue(String jsScript)
-     * Возвращает отвёт после испольнение jscript типа String
+     * executeAndReturnValue(String jsScript) Возвращает отвёт после испольнение
+     * jscript типа String
      *
      * @param jsScript
      * @return String
@@ -234,7 +244,6 @@ public class CommonPage extends AbstractPage {
     public void waitSomeSeconds(int seconds) throws InterruptedException {
         TimeUnit.SECONDS.sleep(seconds);
     }
-
 
     public void tryToClickForXpathElement(String path) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
