@@ -17,16 +17,16 @@ public class LogInPage extends CommonPage {
     private final String entrBtm = "//button[@type=\"submit\"]";
 
     //Выбор личного кабинета для работы
-    public void setLoginCredentials(String credentials) {
+    public void setLoginCredentials(String credentials) throws Exception {
         switch (credentials) {
             case "1": {
-                delayAndSetValueForXpathElement(userLogin, "testestestfortest1@yopmail.com");
-                delayAndSetValueForXpathElement(userPassword, "qwe123QWE");
+                delayAndSetValueForXpathElement(userLogin,config.getConfigParameter("UserLogin"));
+                delayAndSetValueForXpathElement(userPassword, config.getConfigParameter("UserPassword"));
                 break;
             }
             case "2": {
-                delayAndSetValueForIdElement(userLogin, config.getConfigParameter("LoginOrganization"));
-                delayAndSetValueForIdElement(userPassword, config.getConfigParameter("PasswordOrganization"));
+                delayAndSetValueForXpathElement(userLogin, config.getConfigParameter("LoginOrganization"));
+                delayAndSetValueForXpathElement(userPassword, config.getConfigParameter("PasswordOrganization"));
                 break;
             }
         }

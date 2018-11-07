@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CommonPage extends AbstractPage {
 
-    protected ConfigContainer config = ConfigContainer.getInstance();
+    protected ConfigContainer config;
     private final static int DELAY_MAX = 180000;
     private final static int DELAY_INTERVAL = 500;
 
@@ -35,6 +35,7 @@ public class CommonPage extends AbstractPage {
      */
     public CommonPage() {
         super();
+        config = ConfigContainer.getInstance();
     }
 
     /**

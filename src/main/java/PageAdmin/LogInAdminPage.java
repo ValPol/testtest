@@ -16,6 +16,9 @@ public class LogInAdminPage extends CommonPage {
 
     private final String entrBtm = "//button[@type=\"submit\"]";
 
+    public LogInAdminPage(){
+        super();
+    }
     //Выбор личного кабинета для работы
     public void setLoginAdminCredentials(String credentials) {
         switch (credentials) {
