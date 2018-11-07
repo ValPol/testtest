@@ -52,7 +52,7 @@ public class SettingsPage extends CommonPage {
         doWhile(new IAction() {
             @Override
             public boolean Run() throws InterruptedException {
-                delayAndSendKeysForCssElement(birthdayField, "");
+                delayAndSetValueForCssElement(birthdayField, "");
                 waitSomeSeconds(2);
                 delayAndSendKeysForCssElement(birthdayField, "2010-10-10");
                 waitSomeSeconds(1);
