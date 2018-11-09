@@ -1,6 +1,6 @@
 package main;
 
-public abstract class IAction {
+public interface IAction {
 
-    public abstract boolean Run() throws InterruptedException;
+    boolean Run() throws InterruptedException;
 }

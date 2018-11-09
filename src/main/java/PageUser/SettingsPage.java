@@ -5,7 +5,9 @@ import main.java.CommonPage;
 import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selenide.*;
+
 import java.io.File;
+
 import main.IAction;
 
 public class SettingsPage extends CommonPage {
@@ -49,16 +51,14 @@ public class SettingsPage extends CommonPage {
          * +"select.value = \"RU\";select.dispatchEvent(new Event('input', {
          * bubbles: true }));");
          */
-        doWhile(new IAction() {
-            @Override
-            public boolean Run() throws InterruptedException {
-                delayAndSetValueForCssElement(birthdayField, "");
-                waitSomeSeconds(2);
-                delayAndSendKeysForCssElement(birthdayField, "2010-10-10");
-                waitSomeSeconds(1);
-                return $(birthdayField).getValue().compareToIgnoreCase("2010-10-10") == 0;
-            }
-        });
+        doWhile(() -> {
+                    delayAndSetValueForCssElement(birthdayField, "");
+                    waitSomeSeconds(2);
+                    delayAndSendKeysForCssElement(birthdayField, "2010-10-10");
+                    waitSomeSeconds(1);
+                    return $(birthdayField).getValue().compareToIgnoreCase("2010-10-10") == 0;
+                }
+        );
 
         delayAndClickForCssElement(maleGendeRBtn);
         delayAndSetValueForCSSElement(phoneField, "1234456688");
