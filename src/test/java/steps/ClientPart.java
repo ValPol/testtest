@@ -1,4 +1,4 @@
-package test.steps;
+package test.java.steps;
 
 import main.java.PageUser.LogInPage;
 import main.java.PageUser.SettingsPage;
@@ -12,7 +12,6 @@ import main.java.CommonPage;
 
 public class ClientPart extends CommonPage {
 
-    LogInPage page;
     SettingsPage settingsPage = new SettingsPage();
 
     @Given("^I have opened application log in page$")

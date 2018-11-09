@@ -3,6 +3,7 @@ package main.java.PageUser;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+
 import main.java.CommonPage;
 
 /**
@@ -14,13 +15,13 @@ public class LogInPage extends CommonPage {
 
     private final String userPassword = "//input[@name=\"password\"]";
 
-    private final String entrBtm = "//button[@type=\"submit\"]";
+    private final String enterBtn = "//button[@type=\"submit\"]";
 
     //Выбор личного кабинета для работы
-    public void setLoginCredentials(String credentials) throws Exception {
+    public void setLoginCredentials(String credentials) {
         switch (credentials) {
             case "1": {
-                delayAndSetValueForXpathElement(userLogin,config.getConfigParameter("UserLogin"));
+                delayAndSetValueForXpathElement(userLogin, config.getConfigParameter("UserLogin"));
                 delayAndSetValueForXpathElement(userPassword, config.getConfigParameter("UserPassword"));
                 break;
             }
@@ -30,7 +31,7 @@ public class LogInPage extends CommonPage {
                 break;
             }
         }
-        $(By.xpath(entrBtm)).pressEnter();
+        $(By.xpath(enterBtn)).pressEnter();
 
     }
 

@@ -1,6 +1,7 @@
 package main.java;
 
 import main.IAction;
+import main.java.PageUser.LogInPage;
 import main.java.helpers.ConfigContainer;
 import org.openqa.selenium.*;
 
@@ -13,6 +14,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CommonPage extends AbstractPage {
 
+    protected static LogInPage page;
     protected ConfigContainer config;
     private final static int DELAY_MAX = 180000;
     private final static int DELAY_INTERVAL = 500;
