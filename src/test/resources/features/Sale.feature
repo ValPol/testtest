@@ -18,7 +18,7 @@ Feature: Log in feature
   #                                      Администратор утверждает заявку KYC
   #=====================================================================================================================
   Scenario: Successful log in system by certificate
-    Given I have opened application log in page
+    Given I have opened application admin log in page
     When I have select signature "2"
     When I have opened KYC section
     When I have opened KYC request

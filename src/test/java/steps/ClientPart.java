@@ -1,27 +1,22 @@
 package test.java.steps;
 
-
-import main.java.CommonPage;
 import main.java.PageUser.LogInPage;
-
+import main.java.PageUser.SettingsPage;
 import cucumber.api.java.en.Given;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import main.java.PageUser.SettingsPage;
-import main.java.helpers.ConfigContainer;
 
 import static com.codeborne.selenide.Selenide.open;
+import main.java.CommonPage;
 
 public class ClientPart extends CommonPage {
 
-    LogInPage page;
-    ConfigContainer config = new ConfigContainer();
     SettingsPage settingsPage = new SettingsPage();
 
     @Given("^I have opened application log in page$")
     public void iHaveOpenedApplicationLogInPage() throws Throwable {
-        page = open("http://tokensale.dev.avalab.io", LogInPage.class);
+        page = open(config.getConfigParameter("UserUri"), LogInPage.class);
     }
 
     @When("^I enter \"([^\"]*)\"$")
@@ -46,6 +41,6 @@ public class ClientPart extends CommonPage {
 
     @Then("^I have posted KYC-request$")
     public void iHavePostedKYCRequest() throws Throwable {
-       settingsPage.kycFormPosted();
+        settingsPage.kycFormPosted();
     }
 }

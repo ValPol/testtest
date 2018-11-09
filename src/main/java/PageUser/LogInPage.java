@@ -1,9 +1,10 @@
 package main.java.PageUser;
 
-import main.java.CommonPage;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+
+import main.java.CommonPage;
 
 /**
  * Страница логина
@@ -14,23 +15,23 @@ public class LogInPage extends CommonPage {
 
     private final String userPassword = "//input[@name=\"password\"]";
 
-    private final String entrBtm = "//button[@type=\"submit\"]";
+    private final String enterBtn = "//button[@type=\"submit\"]";
 
     //Выбор личного кабинета для работы
     public void setLoginCredentials(String credentials) {
         switch (credentials) {
-            case "user": {
-                delayAndSetValueForXpathElement(userLogin, "testestestfortest1@yopmail.com");
-                delayAndSetValueForXpathElement(userPassword, "qwe123QWE");
+            case "1": {
+                delayAndSetValueForXpathElement(userLogin, config.getConfigParameter("UserLogin"));
+                delayAndSetValueForXpathElement(userPassword, config.getConfigParameter("UserPassword"));
                 break;
             }
-            case "admin": {
-                delayAndSetValueForIdElement(userLogin, "admin@tokensale.local");
-                delayAndSetValueForIdElement(userPassword, "123");
+            case "2": {
+                delayAndSetValueForXpathElement(userLogin, config.getConfigParameter("LoginOrganization"));
+                delayAndSetValueForXpathElement(userPassword, config.getConfigParameter("PasswordOrganization"));
                 break;
             }
         }
-        $(By.xpath(entrBtm)).pressEnter();
+        $(By.xpath(enterBtn)).pressEnter();
 
     }
 
