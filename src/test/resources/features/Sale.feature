@@ -9,7 +9,7 @@ Feature: Log in feature
   #=====================================================================================================================
   Scenario: Successful log in system by certificate
     Given I have opened application log in page
-    When I have select signature "1"
+    When I have select signature "user"
     When I have opened KYC-form
     When I have filled KYC-form
     Then I have posted KYC-request
@@ -19,7 +19,7 @@ Feature: Log in feature
   #=====================================================================================================================
   Scenario: Successful log in system by certificate
     Given I have opened application admin log in page
-    When I have select signature "2"
+    When I have select signature "admin"
     When I have opened KYC section
     When I have opened KYC request
     Then I have approved KYC request

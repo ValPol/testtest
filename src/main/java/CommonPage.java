@@ -115,7 +115,7 @@ public class CommonPage extends AbstractPage {
         Integer count = 0;
         do {
             count++;
-        } while (!action.Run() && count < 30);
+        } while (!action.Run() && count < nTryMax);
     }
 
     public void delayAndSetValueWithoutScrollForIdElement(String path, String value) {
