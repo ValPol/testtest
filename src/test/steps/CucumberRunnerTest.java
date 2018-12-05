@@ -1,4 +1,4 @@
-package test.java.steps;
+package test.steps;
 
 
 import cucumber.api.CucumberOptions;

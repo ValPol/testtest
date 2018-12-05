@@ -1,4 +1,4 @@
-package test.java.steps;
+package test.steps;
 
 import com.codeborne.selenide.junit.BrowserStrategy;
 import cucumber.api.Scenario;

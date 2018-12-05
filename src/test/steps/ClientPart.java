@@ -1,5 +1,6 @@
-package test.java.steps;
+package test.steps;
 
+import cucumber.api.PendingException;
 import main.java.PageUser.LogInPage;
 import main.java.PageUser.SettingsPage;
 import cucumber.api.java.en.Given;
@@ -8,6 +9,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static com.codeborne.selenide.Selenide.open;
+
 import main.java.CommonPage;
 
 public class ClientPart extends CommonPage {
@@ -43,4 +45,25 @@ public class ClientPart extends CommonPage {
     public void iHavePostedKYCRequest() throws Throwable {
         settingsPage.kycFormPosted();
     }
+
+    @When("^I have opened sign in page$")
+    public void iHaveOpenedSignInPage() throws Throwable {
+        page.enterSignInTab();
+    }
+
+    @When("^I have confirm new account$")
+    public void iHaveConfirmNewAccount() throws Throwable {
+        page.confirmNewAccount();
+    }
+
+    @When("^I have set credentials$")
+    public void iHaveSetCredentials() throws Throwable {
+        page.setCredentials();
+    }
+
+    @Then("^I successfully log in$")
+    public void iSuccessfullyLogIn() throws Throwable {
+        page.openUserSpace();
+    }
+
 }

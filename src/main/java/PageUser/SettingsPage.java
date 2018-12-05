@@ -36,14 +36,14 @@ public class SettingsPage extends CommonPage {
 
     public void getKYCForm() {
         $("#main-navigation");
-        delayAndClickForCssElement(settingsPage);
+        clickElement("css", settingsPage);
 
-        delayAndClickWithoutScrollForCssElement(verificationTab);
+        clickElement("css", verificationTab);
     }
 
     public void fillKYCForm() throws InterruptedException {
-        delayAndSetValueForCSSElement(firstNameField, "John");
-        delayAndSetValueForCSSElement(lastNameField, "John");
+        sendKeysForField("css", firstNameField, "John");
+        sendKeysForField("css", lastNameField, "John");
         $(countrySelect).sendKeys(Keys.ARROW_DOWN);
         /**
          * Способ установки значения дропдауна через js js.executeScript("var
@@ -52,21 +52,21 @@ public class SettingsPage extends CommonPage {
          * bubbles: true }));");
          */
         doWhile(() -> {
-                    delayAndSetValueForCssElement(birthdayField, "");
+                    sendKeysForField("css", birthdayField, "");
                     waitSomeSeconds(2);
-                    delayAndSendKeysForCssElement(birthdayField, "2010-10-10");
+                    sendKeysForField("css", birthdayField, "2010-10-10");
                     waitSomeSeconds(1);
                     return $(birthdayField).getValue().compareToIgnoreCase("2010-10-10") == 0;
                 }
         );
 
-        delayAndClickForCssElement(maleGendeRBtn);
-        delayAndSetValueForCSSElement(phoneField, "1234456688");
+        clickElement("css", maleGendeRBtn);
+        sendKeysForField("css", phoneField, "1234456688");
         File file = new File(System.getProperty("user.dir") + "/src/test/resources/test.jpg");
-        delayAndSendKeysForCssElement(fileInput, file.getAbsolutePath());
+        sendKeysForField("css", fileInput, file.getAbsolutePath());
         existForXpathElement("//div[text()=\"test.jpg\"]");
-        delayAndClickWithoutScrollForCssElement(agreeChB);
-        delayAndClickWithoutScrollForCssElement(submitBtn);
+        clickElement("css", agreeChB);
+        clickElement("css", submitBtn);
     }
 
     public void kycFormPosted() {
