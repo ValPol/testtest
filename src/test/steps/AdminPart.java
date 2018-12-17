@@ -36,11 +36,6 @@ public class AdminPart extends CommonPage {
     }
 
 
-    @When("^I have opened KYC request$")
-    public void iHaveOpenedKYCRequest() throws Throwable {
-        kycRequestPage.openKYCrequest();
-    }
-
     @Then("^I have set \"([^\"]*)\" KYC request$")
     public void iHaveSetKYCRequest(String status) throws Throwable {
         kycRequestPage.setStatusKYCRequest(status);
@@ -50,5 +45,10 @@ public class AdminPart extends CommonPage {
     @Then("^I have decline KYC request$")
     public void iHaveDeclineKYCRequest() throws Throwable {
         kycRequestPage.declineKYCRequest();
+    }
+
+    @When("^I have opened KYC \"([^\"]*)\" request$")
+    public void iHaveOpenedKYCRequest(String status) throws Throwable {
+        kycRequestPage.openKYCrequest(status);
     }
 }

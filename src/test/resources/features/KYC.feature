@@ -2,6 +2,17 @@
 
 Feature: KYC send and approve/decline feature
 
+
+  #=====================================================================================================================
+  #                                      Администратор утверждает заявку KYC
+  #=====================================================================================================================
+  Scenario: Admin approve user`s KYC-request
+    Given I have opened application admin login page
+    When I have select admin signature "admin"
+    When I have opened KYC section
+    When I have opened KYC "Approved" request
+    Then I have set "Pending" KYC request
+
   #=====================================================================================================================
   #                                       Отправка заполненной формы KYC клиентом
   #=====================================================================================================================
@@ -19,7 +30,7 @@ Feature: KYC send and approve/decline feature
     Given I have opened application admin login page
     When I have select admin signature "admin"
     When I have opened KYC section
-    When I have opened KYC request
+    When I have opened KYC "Pending" request
     Then I have set "approved" KYC request
 
   #=====================================================================================================================
@@ -29,7 +40,7 @@ Feature: KYC send and approve/decline feature
     Given I have opened application admin login page
     When I have select admin signature "admin"
     When I have opened KYC section
-    When I have opened KYC request
+    When I have opened KYC "Pending" request
     Then I have set "approved" KYC request
 
   #=====================================================================================================================
@@ -49,7 +60,7 @@ Feature: KYC send and approve/decline feature
     Given I have opened application admin login page
     When I have select signature "admin"
     When I have opened KYC section
-    When I have opened KYC request
+    When I have opened KYC "Pending" request
     Then I have set "declined" KYC request
 
 

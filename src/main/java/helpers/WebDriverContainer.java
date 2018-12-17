@@ -19,9 +19,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeDriverService;
-import org.openqa.selenium.edge.EdgeOptions;
+
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.LocalFileDetector;
 
@@ -96,16 +94,16 @@ public class WebDriverContainer {
                 options = getFirefoxOptions();
                 break;
             }
-            case "edge": {
+         /*   case "edge": {
                 if (host == null) {
                     driverexe = new File("src/test/resources/drivers/MicrosoftWebDriver.exe");
                     System.setProperty("webdriver.edge.driver", "src/test/resources/drivers/MicrosoftWebDriver.exe");
                 }
                 capabilities = DesiredCapabilities.edge();
                 capabilities.setBrowserName(BrowserType.EDGE);
-                options = getEdgeOptions();
+               // options = getEdgeOptions();
                 break;
-            }
+            }*/
             case "chrome":
             default: {
                 if (host == null) {
@@ -138,13 +136,13 @@ public class WebDriverContainer {
                     driver = new FirefoxDriver(service, (FirefoxOptions) options);
                     break;
                 }
-                case "edge": {
+            /*    case "edge": {
                     EdgeDriverService service = new EdgeDriverService.Builder().usingDriverExecutable(driverexe)
                             .usingAnyFreePort()
                             .build();
                     driver = new EdgeDriver(service, getEdgeOptions());
                     break;
-                }
+                }*/
                 case "chrome":
                 default: {
                     ChromeDriverService service = new ChromeDriverService.Builder().usingDriverExecutable(driverexe)
@@ -201,10 +199,10 @@ public class WebDriverContainer {
      *
      * @return
      */
-    private EdgeOptions getEdgeOptions() {
+/*    private EdgeOptions getEdgeOptions() {
         EdgeOptions options = new EdgeOptions();
         return options;
-    }
+    }*/
 
     public static void CloseDrivers() {
         driver.quit();
