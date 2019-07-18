@@ -40,7 +40,7 @@ public class WebDriverContainer {
     /**
      * Браузер по умолчанию для режима не из под контейнера
      */
-    private final String DEFAULT_BROWSER = "chrome"; //firefox/chrome/edge
+    private final String DEFAULT_BROWSER = "chrome"; //firefox/chrome
 
     /**
      * *****************************************************************************************************************
@@ -94,16 +94,7 @@ public class WebDriverContainer {
                 options = getFirefoxOptions();
                 break;
             }
-         /*   case "edge": {
-                if (host == null) {
-                    driverexe = new File("src/test/resources/drivers/MicrosoftWebDriver.exe");
-                    System.setProperty("webdriver.edge.driver", "src/test/resources/drivers/MicrosoftWebDriver.exe");
-                }
-                capabilities = DesiredCapabilities.edge();
-                capabilities.setBrowserName(BrowserType.EDGE);
-               // options = getEdgeOptions();
-                break;
-            }*/
+
             case "chrome":
             default: {
                 if (host == null) {
@@ -123,12 +114,6 @@ public class WebDriverContainer {
 
         options.merge(capabilities);
 
-        if (host != null) {
-            driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), options);
-            /*Метод setFileDetector говорит вебдрайверу, что файл загружается с 
-            локальной машины на удаленный сервер вместо обычного указания локального пути к файлу*/
-            ((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
-        } else {
             switch (browser.trim().toLowerCase()) {
                 case "firefox": {
                     GeckoDriverService service = new GeckoDriverService.Builder().usingDriverExecutable(driverexe)
@@ -136,13 +121,6 @@ public class WebDriverContainer {
                     driver = new FirefoxDriver(service, (FirefoxOptions) options);
                     break;
                 }
-            /*    case "edge": {
-                    EdgeDriverService service = new EdgeDriverService.Builder().usingDriverExecutable(driverexe)
-                            .usingAnyFreePort()
-                            .build();
-                    driver = new EdgeDriver(service, getEdgeOptions());
-                    break;
-                }*/
                 case "chrome":
                 default: {
                     ChromeDriverService service = new ChromeDriverService.Builder().usingDriverExecutable(driverexe)
@@ -151,7 +129,7 @@ public class WebDriverContainer {
                     break;
                 }
             }
-        }
+
 
         WebDriverRunner.setWebDriver(driver);
     }
@@ -194,15 +172,6 @@ public class WebDriverContainer {
         return options;
     }
 
-    /**
-     * И так сойдёт!
-     *
-     * @return
-     */
-/*    private EdgeOptions getEdgeOptions() {
-        EdgeOptions options = new EdgeOptions();
-        return options;
-    }*/
 
     public static void CloseDrivers() {
         driver.quit();

@@ -4,6 +4,16 @@ Feature: KYC send and approve/decline feature
 
 
   #=====================================================================================================================
+  #                                       Отправка заполненной формы KYC клиентом
+  #=====================================================================================================================
+  Scenario: User send KYC-request for administrator
+    Given I have opened application log in page
+    When I have select signature "user"
+    When I have opened KYC-form
+    When I have filled KYC-form
+    Then I have posted KYC-request
+
+  #=====================================================================================================================
   #                                      Администратор утверждает заявку KYC
   #=====================================================================================================================
   Scenario: Admin approve user`s KYC-request
@@ -13,15 +23,6 @@ Feature: KYC send and approve/decline feature
     When I have opened KYC "Approved" request
     Then I have set "Pending" KYC request
 
-  #=====================================================================================================================
-  #                                       Отправка заполненной формы KYC клиентом
-  #=====================================================================================================================
-  Scenario: User send KYC-request for administrator
-    Given I have opened application log in page
-    When I have select signature "user"
-    When I have opened KYC-form
-    When I have filled KYC-form
-    Then I have posted KYC-request
 
   #=====================================================================================================================
   #                                      Администратор утверждает заявку KYC

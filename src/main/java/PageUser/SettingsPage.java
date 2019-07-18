@@ -55,7 +55,7 @@ public class SettingsPage extends CommonPage {
                     sendKeysForField("css", birthdayField, "");
                     waitSomeSeconds(2);
                     sendKeysForField("css", birthdayField, "2010-10-10");
-                    waitSomeSeconds(1);
+                    waitSomeSeconds(2);
                     return $(birthdayField).getValue().compareToIgnoreCase("2010-10-10") == 0;
                 }
         );
