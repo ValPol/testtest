@@ -12,15 +12,15 @@ import main.java.CommonPage;
  */
 public class LogInPage extends CommonPage {
 
-    private final String userLogin = "//input[@name=\"email\"]";
+    private final String userLogin = "//input[@name=\"username\"]";
 
     private final String userPassword = "//input[@name=\"password\"]";
 
     private final String enterBtn = "//button[@type=\"submit\"]";
 
-    private final String signInTab = "[href = \"/auth/signup\"]";
+    private final String signInTab = "";
 
-    private final String confirmPassword = "[name=\"confirmPassword\"]";
+    private final String confirmPassword = "";
 
     //Выбор личного кабинета для работы
     public void setLoginCredentials(String credentials) {
@@ -33,31 +33,7 @@ public class LogInPage extends CommonPage {
 
         }
         $(By.xpath(enterBtn)).pressEnter();
-
-    }
-
-    public void enterSignInTab() {
-        clickElement("css", signInTab);
-    }
-
-    public void setCredentials() {
-        config.setProperties("newlogin", generateGuid() + "@tokensale-autotest.avalab");
-        sendKeysForField("xpath", userLogin, config.getConfigParameter("newlogin"));
-        sendKeysForField("xpath", userPassword, config.getConfigParameter("UserPassword"));
-        sendKeysForField("css", confirmPassword, config.getConfigParameter("UserPassword"));
-
-        clickElement("xpath", enterBtn);
-        waitApperanceElement("xpath", "//*[text() = \"Please confirm your email to start\"]");
-    }
-
-    public void confirmNewAccount() {
-        String confirmLink = config.getConfigParameter("UserUri") + "api/autotests/emails/" + config.getConfigParameter("newlogin") + "/verifyurl";
-        open(confirmLink);
-        open($("pre").getText());
-    }
-
-    public void openUserSpace() {
-        waitApperanceElement("xpath", "//*[text()=\"Dashboard\"]");
+        waitApperanceElement("xpath", "//h1[text()=\"Dashboard\"]");
     }
 
 }
