@@ -1,69 +1,18 @@
- @All
-
-Feature: KYC send and approve/decline feature
+Feature: Landing Feature
 
 
-  #=====================================================================================================================
-  #                                       Отправка заполненной формы KYC клиентом
-  #=====================================================================================================================
-  Scenario: User send KYC-request for administrator
+  Scenario: User check instagram images
     Given I have opened application log in page
-    When I have select signature "user"
-    When I have opened KYC-form
-    When I have filled KYC-form
-    Then I have posted KYC-request
-
-  #=====================================================================================================================
-  #                                      Администратор утверждает заявку KYC
-  #=====================================================================================================================
-  Scenario: Admin approve user`s KYC-request
-    Given I have opened application admin login page
-    When I have select admin signature "admin"
-    When I have opened KYC section
-    When I have opened KYC "Approved" request
-    Then I have set "Pending" KYC request
+    When I choose pexlife page
+    When I check instagram
 
 
-  #=====================================================================================================================
-  #                                      Администратор утверждает заявку KYC
-  #=====================================================================================================================
-  Scenario: Admin approve user`s KYC-request
-    Given I have opened application admin login page
-    When I have select admin signature "admin"
-    When I have opened KYC section
-    When I have opened KYC "Pending" request
-    Then I have set "approved" KYC request
-
-  #=====================================================================================================================
-  #                                      Администратор утверждает заявку KYC
-  #=====================================================================================================================
-  Scenario: Admin approve user`s KYC-request
-    Given I have opened application admin login page
-    When I have select admin signature "admin"
-    When I have opened KYC section
-    When I have opened KYC "Pending" request
-    Then I have set "approved" KYC request
-
-  #=====================================================================================================================
-  #                                       Отправка заполненной формы KYC клиентом
-  #=====================================================================================================================
-  Scenario: User send KYC-request for administrator 2
+  Scenario: User check pinterest images
     Given I have opened application log in page
-    When I have select signature "user"
-    When I have opened KYC-form
-    When I have filled KYC-form
-    Then I have posted KYC-request
+    When I choose pexlife page
+    When I check pinterest
 
-  #=====================================================================================================================
-  #                                      Администратор отклоняет заявку KYC
-  #=====================================================================================================================
-  Scenario: Admin decline user`s KYC-request
-    Given I have opened application admin login page
-    When I have select signature "admin"
-    When I have opened KYC section
-    When I have opened KYC "Pending" request
-    Then I have set "declined" KYC request
-
-
-
-
+  Scenario: User login
+    Given I have opened application log in page
+    When I enter users cabinet
+    When I enter credentials

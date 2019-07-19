@@ -90,7 +90,7 @@ public class ConfigContainer implements Serializable {
         String configName = System.getenv("EDO_AUTOTEST_CONFIG");
         System.out.println(" [-]: SYSTEM ENV variable EDO_AUTOTEST_CONFIG is : '" + configName + "'.");
         if (configName == null) {
-            configName = "stable_servicing";
+            configName = "config";
         }
         return configName;
     }
